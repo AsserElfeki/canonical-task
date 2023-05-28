@@ -1,11 +1,9 @@
-
-
 function createHeader(postTag) {
     const header = document.createElement('header');
     header.classList.add('p-card__header', 'u-no-margin--top');
     const category = document.createElement('h5');
     category.textContent = postTag;
-    category.classList.add('p-muted-heading', 'u-no-margin--bottom', 'u-no-border--bottom');
+    category.classList.add('p-muted-heading', 'u-no-margin--bottom');
     header.appendChild(category);
 
     return header
@@ -93,12 +91,12 @@ function populateCards(data) {
         const authorLink = post._embedded["author"][0].link
         const thumbnailUrl = post.featured_media;
         const postCategory = post._embedded["wp:term"][0][0].name
-        let postTopic = undefined;
+        let postTopic = null;
         try {
             postTopic = post._embedded["wp:term"][2][0].name
         }
         catch (e) {
-            postTopic = post._embedded["wp:term"][1][0].name
+            postTopic = post._embedded["wp:term"][1][0].name //post tag, because 3rd post in the response has only category and tag, also the post itself was removed it seems, link is not working
         }
         const postLink = post.link
         const date = post.date
