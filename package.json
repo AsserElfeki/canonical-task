@@ -6,6 +6,7 @@
   },
   "scripts": {
     "build-css": "sass -w --load-path=node_modules src:dist --style=compressed",
-    "watch-css": "yarn build-css && sass --load-path=node_modules -w src:dist --style=compressed"
+    "watch-css": "yarn build-css && sass --load-path=node_modules -w src:dist --style=compressed",
+    "start": "open index.html && node script.js"
   }
 }

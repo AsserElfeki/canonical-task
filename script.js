@@ -1,3 +1,6 @@
+import { default as axios } from 'axios';
+
+
 function createHeader(postTag) {
     const header = document.createElement('header');
     header.classList.add('p-card__header', 'u-no-margin--top');
@@ -10,7 +13,7 @@ function createHeader(postTag) {
 }
 
 function createImage(postLink, thumbnailUrl) {
-    
+
     const imageLink = document.createElement('a');
     imageLink.href = postLink;
     const image = document.createElement('img');
