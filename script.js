@@ -109,8 +109,9 @@ function populateCards(data) {
 
 // Make the AJAX request using Axios
 fetch('https://people.canonical.com/~anthonydillon/wp-json/wp/v2/posts.json')
-    .then(response => {
-        const data = response.data;
+    .then(response => response.json())
+    .then(data => {
+        // const data = response.data;
         //console.log("data: " , response.data)
         populateCards(data);
     })
