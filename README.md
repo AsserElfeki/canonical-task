@@ -1,7 +1,8 @@
 # canonical-task
 This is the solution to the code test task as sent to me. 
 
-## 🌍 [view deployment](https://asserelfeki.github.io/canonical-task/)
+
+🌍 [view deployment](https://asserelfeki.github.io/canonical-task/)
 
 ## How to run:
 
