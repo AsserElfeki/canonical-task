@@ -8,5 +8,5 @@ author link: post._embedded["author"][0].link
 
 category : post._embedded["wp:term"][0][0].name (bottom of page)
 tag : post._embedded["wp:term"][1][0].name (top of page)
-topic : post._embedded["wp:term"][2]
-group : post._embedded["wp:term"][3]
+topic : post._embedded["wp:term"][2].name
+group : post._embedded["wp:term"][3].name

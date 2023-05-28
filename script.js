@@ -1,4 +1,3 @@
-import { default as axios } from 'axios';
 
 
 function createHeader(postTag) {
@@ -94,10 +93,16 @@ function populateCards(data) {
         const authorLink = post._embedded["author"][0].link
         const thumbnailUrl = post.featured_media;
         const postCategory = post._embedded["wp:term"][0][0].name
-        const postTag = post._embedded["wp:term"][1][0].name
+        let postTopic = undefined;
+        try {
+            postTopic = post._embedded["wp:term"][2][0].name
+        }
+        catch (e) {
+            postTopic = post._embedded["wp:term"][1][0].name
+        }
         const postLink = post.link
         const date = post.date
-        const card = createCard(title, authorName, authorLink, thumbnailUrl, postCategory, postTag, postLink, date);
+        const card = createCard(title, authorName, authorLink, thumbnailUrl, postCategory, postTopic, postLink, date);
         cardContainer.appendChild(card);
     });
 }
