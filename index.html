@@ -1,17 +1,54 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <link rel="stylesheet" href="src/style.scss">
-  <title>Canonical Blog Posts</title>
+<html lang="en">
 
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./dist/style.css">
+  <title>Canonical Blog Posts</title>
 </head>
 
 <body>
-  <div class="container" id="cardContainer"></div>
+  <div class="u-vertically-center wrapper">
+    <div class="row" id="cardContainer">
 
-  <script src="node_modules/axios/dist/axios.min.js"></script>
-  <script src="./script.js"></script>
-
-  
+    </div>
+  </div>
 </body>
+
+<script src="node_modules/axios/dist/axios.min.js"></script>
+<script src="./script.js"></script>
+</body>
+
 </html>
+
+
+<div class="col-4 col-medium-2 blog-p-card--post">
+  <header class="blog-p-card__header highlight--ai">
+    <h5 class="p-muted-heading u-no-margin--bottom">AI</h5>
+  </header>
+  <div class="blog-p-card__content">
+    <div class="u-crop--16-9">
+      <a href="/blog/secure-mlops-tooling" aria-hidden="true" tabindex="-1">
+        <div class=" lazyloaded" data-noscript="">
+          <img alt="" height="311" loading="lazy"
+            src="https://res.cloudinary.com/canonical/image/fetch/f_auto,q_auto,fl_sanitize,e_sharpen,c_fill,w_555,h_311/https://ubuntu.com/wp-content/uploads/5dd0/Screenshot-2023-05-26-at-13.06.01.png"
+            srcset="https://res.cloudinary.com/canonical/image/fetch/f_auto,q_auto,fl_sanitize,e_sharpen,c_fill,w_1110,h_622/https://ubuntu.com/wp-content/uploads/5dd0/Screenshot-2023-05-26-at-13.06.01.png 2x"
+            width="555">
+        </div>
+      </a>
+    </div>
+    <h3 class="p-heading--4">
+      <a href="/blog/secure-mlops-tooling">How to secure your MLOps tooling?</a>
+    </h3>
+    <p>
+      <em>by
+        <a href="/blog/author/munteanuandreea">Andreea Munteanu</a>
+        on 26 May 2023</em>
+    </p>
+  </div>
+  <p class="blog-p-card__footer">
+    Article
+  </p>
+</div>

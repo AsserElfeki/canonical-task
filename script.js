@@ -1,37 +1,82 @@
+function createHeader(postTag) {
+    const header = document.createElement('header');
+    header.classList.add('p-card__header', 'u-no-margin--top');
+    const category = document.createElement('h5');
+    category.textContent = postTag;
+    category.classList.add('p-muted-heading', 'u-no-margin--bottom', 'u-no-border--bottom');
+    header.appendChild(category);
+
+    return header
+}
+
+function createImage(postLink, thumbnailUrl) {
+    
+    const imageLink = document.createElement('a');
+    imageLink.href = postLink;
+    const image = document.createElement('img');
+    image.classList.add('p-card-image');
+    image.src = thumbnailUrl;
+    image.alt = 'Thumbnail';
+    image.loading = 'lazy';
+    imageLink.appendChild(image);
+
+    return imageLink
+}
+
+function createTitle(postTitle, postLink) {
+    const title = document.createElement('h3');
+    title.classList.add('p-headig--4');
+    const titleLink = document.createElement('a');
+    titleLink.href = postLink;
+    titleLink.textContent = postTitle;
+    title.appendChild(titleLink)
+
+    return title
+}
+
+function createAuthor(authorName, authorLink, date) {
+    const authorContainer = document.createElement('p');
+    const author = document.createElement('em');
+    const postDate = new Date(date)
+    const formattedPostDate = postDate.toLocaleDateString(undefined, { day: 'numeric', month: 'long', year: 'numeric' })
+    author.innerHTML = `By <a href = "${authorLink}">  ${authorName}</a>  on ${formattedPostDate}`;
+    authorContainer.appendChild(author);
+
+    return authorContainer
+}
+
+function createContent(authorName, authorLink, thumbnailUrl, postTitle, postLink, date) {
+    const content = document.createElement('div');
+    content.classList.add('post__content', 'p-card__content');
+
+    //Image container
+    content.appendChild(createImage(postLink, thumbnailUrl));
+
+    //Title
+    content.appendChild(createTitle(postTitle, postLink));
+
+    //Author
+    content.appendChild(createAuthor(authorName, authorLink, date));
+
+    return content
+}
+
+function createFooter(postCategory) {
+    const post_footer = document.createElement('p');
+    post_footer.classList.add('p-card__footer', 'blog-p-card__footer');
+    post_footer.textContent = postCategory;
+    return post_footer;
+}
+
+
 // Function to create a card element
-function createCard(title, authorName, thumbnailUrl, post_category, post_tag) {
-    //container
+function createCard(postTitle, authorName, authorLink, thumbnailUrl, postCategory, postTag, postLink, date) {
     const card = document.createElement('div');
-    card.className = 'card';
+    card.classList.add('p-card', 'col-4', 'highlight');
 
-    //image
-    const thumbnail = document.createElement('div');
-    thumbnail.className = 'card__thumbnail';
-    const thumbnailImg = document.createElement('img');
-    thumbnailImg.src = thumbnailUrl;
-    thumbnailImg.alt = 'Thumbnail';
-    thumbnail.appendChild(thumbnailImg);
-
-    //content
-    const cardContent = document.createElement('div');
-    cardContent.className = 'card__content';
-    const cardTitle = document.createElement('h2');
-    cardTitle.textContent = title;
-    const author = document.createElement('p');
-    author.textContent = authorName;
-    cardContent.appendChild(cardTitle);
-    cardContent.appendChild(author);
-
-
-    const category = document.createElement('h2');
-    category.textContent = post_category;
-    const tag = document.createElement('p');
-    tag.textContent = post_tag;
-    cardContent.appendChild(category);
-    cardContent.appendChild(tag);
-
-    card.appendChild(thumbnail);
-    card.appendChild(cardContent);
+    card.appendChild(createHeader(postTag));
+    card.appendChild(createContent(authorName, authorLink, thumbnailUrl, postTitle, postLink, date))
+    card.appendChild(createFooter(postCategory));
 
     return card;
 }
@@ -43,10 +88,13 @@ function populateCards(data) {
     data.forEach(post => {
         const title = post.title.rendered;
         const authorName = post._embedded.author[0].name
+        const authorLink = post._embedded["author"][0].link
         const thumbnailUrl = post.featured_media;
-        const post_category = post._embedded["wp:term"][0][0].name
-        const post_tag = post._embedded["wp:term"][1][0].name
-        const card = createCard(title, authorName, thumbnailUrl, post_category, post_tag);
+        const postCategory = post._embedded["wp:term"][0][0].name
+        const postTag = post._embedded["wp:term"][1][0].name
+        const postLink = post.link
+        const date = post.date
+        const card = createCard(title, authorName, authorLink, thumbnailUrl, postCategory, postTag, postLink, date);
         cardContainer.appendChild(card);
     });
 }
@@ -56,7 +104,6 @@ axios.get('https://people.canonical.com/~anthonydillon/wp-json/wp/v2/posts.json'
     .then(response => {
         const data = response.data;
         //console.log("data: " , response.data)
-        //console.log("a7eeh: ", data[2]._embedded['wp:term'][1][0].name)
         populateCards(data);
     })
     .catch(error => {
