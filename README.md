@@ -16,10 +16,8 @@ or:
    ``` 
    cd canonical-task
    ```
-3. run the 2 following commands: 
+3. run the following command: 
    ```
-   yarn install
-
    yarn start
    ```
 
